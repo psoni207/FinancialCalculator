@@ -4,8 +4,8 @@ import { z } from "zod";
 
 // User roles
 export const USER_ROLES = {
-  USER: 'user',
-  ADMIN: 'admin'
+  USER: 'USER',
+  ADMIN: 'ADMIN'
 } as const;
 
 // Base user model
