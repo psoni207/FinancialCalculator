@@ -9,6 +9,7 @@ import SwpCalculatorPage from "@/pages/SwpCalculatorPage";
 import EmiCalculatorPage from "@/pages/EmiCalculatorPage";
 import LumpsumCalculatorPage from "@/pages/LumpsumCalculatorPage";
 import SipTopUpCalculatorPage from "@/pages/SipTopUpCalculatorPage";
+import InflationCalculatorPage from "@/pages/InflationCalculatorPage";
 import NotFound from "@/pages/not-found";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider, useAuth } from "@/hooks/use-auth";
@@ -63,6 +64,7 @@ function Router() {
       <Route path="/calculators/sip" component={SipCalculatorPage} />
       <Route path="/calculators/swp" component={SwpCalculatorPage} />
       <Route path="/calculators/emi" component={EmiCalculatorPage} />
+      <Route path="/calculators/inflation" component={InflationCalculatorPage} />
       <Route path="/calculators/lumpsum">
         {() => <ProtectedRoute component={LumpsumCalculatorPage} />}
       </Route>
@@ -79,7 +81,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider
         attribute="class"
-        defaultTheme="light"
+        defaultTheme="dark"
         enableSystem
         disableTransitionOnChange
       >

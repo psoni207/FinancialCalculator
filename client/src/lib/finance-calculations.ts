@@ -335,6 +335,48 @@ export function calculateSipTopUp(
   };
 }
 
+// Inflation Calculator
+export interface YearlyInflationValue {
+  year: number;
+  yearLabel: string;
+  originalValue: number;
+  inflatedValue: number;
+}
+
+export function calculateInflation(
+  amount: number,
+  inflationRate: number,
+  timePeriod: number
+) {
+  // Calculate future value with inflation
+  const annualRate = inflationRate / 100;
+  const futureValue = amount * Math.pow(1 + annualRate, timePeriod);
+  const inflationImpact = futureValue - amount;
+  
+  // Generate yearly breakdown
+  const yearlyData: YearlyInflationValue[] = [];
+  const currentYear = new Date().getFullYear();
+  
+  for (let year = 1; year <= timePeriod; year++) {
+    // Calculate amount at end of this year
+    const inflatedValue = amount * Math.pow(1 + annualRate, year);
+    
+    yearlyData.push({
+      year,
+      yearLabel: (currentYear + year - 1).toString(),
+      originalValue: amount,
+      inflatedValue: Math.round(inflatedValue)
+    });
+  }
+  
+  return {
+    originalValue: amount,
+    inflationImpact: Math.round(inflationImpact),
+    futureValue: Math.round(futureValue),
+    yearlyData
+  };
+}
+
 // Format currency to Indian Rupees format
 export function formatCurrency(amount: number): string {
   return '₹' + amount.toLocaleString('en-IN');

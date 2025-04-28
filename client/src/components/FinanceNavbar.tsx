@@ -52,6 +52,11 @@ const calculators: MenuItemType[] = [
     description: "Calculate your loan EMI, total interest and payment schedules",
   },
   {
+    title: "Inflation Calculator",
+    href: "/calculators/inflation",
+    description: "See how inflation impacts your money's purchasing power over time",
+  },
+  {
     title: "SIP Top-Up Calculator",
     href: "/calculators/sip-topup",
     description: "See how increasing your SIP periodically accelerates wealth creation",
@@ -137,6 +142,31 @@ export default function FinanceNavbar() {
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
+                
+                {/* Admin-only navigation item */}
+                {user?.role === "ADMIN" && (
+                  <NavigationMenuItem>
+                    <Link href="/admin">
+                      <NavigationMenuTrigger>ADMIN DASHBOARD</NavigationMenuTrigger>
+                    </Link>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4">
+                        <ListItem
+                          title="User Management"
+                          href="/admin"
+                        >
+                          Manage users and premium access permissions
+                        </ListItem>
+                        <ListItem
+                          title="Client Management"
+                          href="/admin"
+                        >
+                          Manage client data and information
+                        </ListItem>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                )}
               </NavigationMenuList>
             </NavigationMenu>
           ) : (
@@ -151,11 +181,30 @@ export default function FinanceNavbar() {
                   <div className="pb-2">
                     <h3 className="font-medium mb-2">CALCULATORS</h3>
                     {calculators.map((item) => (
-                      <Link key={item.title} href={item.href}>
-                        <a className="block py-2 text-sm text-gray-600">{item.title}</a>
-                      </Link>
+                      <div key={item.title} className="py-2">
+                        <Link href={item.href}>
+                          <span className="block text-sm text-gray-600 cursor-pointer">{item.title}</span>
+                        </Link>
+                      </div>
                     ))}
                   </div>
+
+                  {/* Admin options for mobile */}
+                  {user?.role === "ADMIN" && (
+                    <div className="pb-2">
+                      <h3 className="font-medium mb-2">ADMIN</h3>
+                      <div className="py-2">
+                        <Link href="/admin">
+                          <span className="block text-sm text-gray-600 cursor-pointer">User Management</span>
+                        </Link>
+                      </div>
+                      <div className="py-2">
+                        <Link href="/admin">
+                          <span className="block text-sm text-gray-600 cursor-pointer">Client Management</span>
+                        </Link>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>

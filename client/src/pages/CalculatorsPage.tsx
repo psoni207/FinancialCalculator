@@ -24,6 +24,12 @@ const calculators = [
     icon: <CreditCard className="h-10 w-10 text-purple-600" />
   },
   {
+    title: "Inflation Calculator",
+    description: "See how inflation impacts your money's purchasing power over time",
+    href: "/calculators/inflation",
+    icon: <TrendingUp className="h-10 w-10 text-red-600" />
+  },
+  {
     title: "SIP Top-Up Calculator",
     description: "See how increasing your SIP periodically accelerates wealth creation",
     href: "/calculators/sip-topup",
@@ -55,17 +61,17 @@ export default function CalculatorsPage() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {calculators.map((calculator) => (
-            <Link key={calculator.title} href={calculator.href}>
-              <a className="block h-full">
-                <Card className="h-full hover:shadow-lg transition-shadow duration-300">
+            <div key={calculator.title} className="block h-full">
+              <Link href={calculator.href}>
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer">
                   <CardContent className="p-6 flex flex-col items-center text-center h-full">
                     <div className="mb-4 mt-2">{calculator.icon}</div>
                     <h2 className="text-xl font-semibold mb-2">{calculator.title}</h2>
                     <p className="text-gray-600">{calculator.description}</p>
                   </CardContent>
                 </Card>
-              </a>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
       </main>
